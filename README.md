@@ -1,4 +1,6 @@
 # Shortcake (Shortcode UI) #
+[![Build Status](https://travis-ci.org/bu-ist/Shortcake.svg?branch=master)](https://travis-ci.org/bu-ist/Shortcake)
+
 **Contributors:** fusionengineering, mattheu, danielbachhuber, zebulonj, goldenapples, jitendraharpalani, sanchothefat, bfintal, davisshaver  
 **Tags:** shortcodes  
 **Requires at least:** 4.1  
