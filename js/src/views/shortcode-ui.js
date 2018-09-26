@@ -1,7 +1,5 @@
 var Backbone = require('backbone'),
 	insertShortcodeList = require('sui-views/insert-shortcode-list'),
-	TabbedView = require('sui-views/tabbed-view'),
-	ShortcodePreview = require('sui-views/shortcode-preview'),
 	EditShortcodeForm = require('sui-views/edit-shortcode-form'),
 	Toolbar = require('sui-views/media-toolbar'),
 	SearchShortcode = require('sui-views/search-shortcode'),
@@ -24,7 +22,7 @@ var Shortcode_UI = Backbone.View.extend({
 	createToolbar: function(options) {
 		toolbarOptions = {
 			controller: this.toolbar_controller
-		}
+		};
 
 		this.toolbar = new Toolbar( toolbarOptions );
 
@@ -64,28 +62,7 @@ var Shortcode_UI = Backbone.View.extend({
 
 	renderEditShortcodeView: function() {
 		var shortcode = this.controller.props.get( 'currentShortcode' );
-		var view = new TabbedView({
-			tabs: {
-				edit: {
-					label: shortcodeUIData.strings.edit_tab_label,
-					content: new EditShortcodeForm({ model: shortcode })
-				},
-
-				preview: {
-					label: shortcodeUIData.strings.preview_tab_label,
-					content: new ShortcodePreview({ model: shortcode }),
-					open: function() {
-						this.render();
-					}
-				}
-			},
-
-			styles: {
-				group:	'media-router edit-shortcode-tabs',
-				tab:	'media-menu-item edit-shortcode-tab'
-			}
-		});
-
+		var view = new EditShortcodeForm({ model: shortcode });
 		this.$el.append( view.render().el );
 
 		if ( this.controller.props.get('action') === 'update' ) {
@@ -105,7 +82,7 @@ var Shortcode_UI = Backbone.View.extend({
 	},
 
 	select: function(e) {
-		this.controller.props.set( 'action', 'insert' );
+
 		var target    = $(e.currentTarget).closest( '.shortcode-list-item' );
 		var shortcode = sui.shortcodes.findWhere( { shortcode_tag: target.attr( 'data-shortcode' ) } );
 
@@ -113,9 +90,23 @@ var Shortcode_UI = Backbone.View.extend({
 			return;
 		}
 
+		this.controller.props.set( 'action', 'insert' );
 		this.controller.props.set( 'currentShortcode', shortcode.clone() );
 
 		this.render();
+
+		/* Trigger render_new */
+		/*
+		 * Action run after a new shortcode overlay is rendered.
+		 *
+		 * Called as `shortcode-ui.render_new`.
+		 *
+		 * @param shortcodeModel (object)
+		 *           Reference to the shortcode model used in this overlay.
+		 */
+		var hookName = 'shortcode-ui.render_new';
+		var shortcodeModel = this.controller.props.get( 'currentShortcode' );
+		wp.shortcake.hooks.doAction( hookName, shortcodeModel );
 
 	},
 

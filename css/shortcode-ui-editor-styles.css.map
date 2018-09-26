@@ -1,10 +1,1 @@
-{
-	"version": 3,
-	"file": "shortcode-ui-editor-styles.css",
-	"sources": [
-		"../shortcode-ui-editor-styles.scss"
-	],
-	"sourcesContent": [],
-	"mappings": "AAGA,AAAY,AAA0B;EACnC,AAAS;AAIZ,AAAa;EACX,AAAO;EACP,AAAa;AAGf,AAAa;EACX,AAAa;EACb,AAAO;EACP,AAAW;;AAIb,AAAI;EACH,AAAS;EACT,AAAO;EACP,AAAU",
-	"names": []
-}
+{"version":3,"sources":["sass/shortcode-ui-editor-styles.scss"],"names":[],"mappings":"AAAA;EAIG,eAAe,EACf;;AALH;EASE,WAAW;EACX,kBAAkB,EAClB;;AAXF;EAcE,yCAAyC;EACzC,YAAY;EACZ,gBAAgB,EAChB;;AAGF;EACC,sBAAsB;EACtB,YAAY;EACZ,iBAAiB,EACjB","file":"shortcode-ui-editor-styles.css"}
